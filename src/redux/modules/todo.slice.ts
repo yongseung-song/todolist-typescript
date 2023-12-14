@@ -32,6 +32,8 @@ const todoSlice = createSlice({
         }
         return todo;
       });
+      const stringifiedTodos = JSON.stringify(state.todos);
+      localStorage.setItem('todos', stringifiedTodos);
     },
     deleteTodo: (state, action: PayloadAction<string>) => {
       state.todos = state.todos.filter((todo) => todo.id !== action.payload);
