@@ -12,7 +12,11 @@ const GlobalStyle = createGlobalStyle`
   ::-webkit-scrollbar {
     display: none;
   }
-  
+  :root {
+    min-width: 800px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }  
 `;
 
 export default GlobalStyle;

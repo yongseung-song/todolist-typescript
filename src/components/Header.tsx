@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 function Header() {
-  return <StHeader>TodoList - level 1 - React</StHeader>;
+  return <StHeader>TodoList level 1 - React</StHeader>;
 }
 
 export default Header;

@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import styled from 'styled-components';
 import Header from './components/Header';
 import TodoForm from './components/TodoForm';
 import TodoListContainer from './components/TodoListContainer';
@@ -14,18 +13,12 @@ function App() {
   const [todos, setTodos] = useState<Todo[]>([]);
   console.log(todos);
   return (
-    <StAppContainer>
+    <>
       <Header />
       <TodoForm setTodos={setTodos} />
       <TodoListContainer todos={todos} setTodos={setTodos} />
-    </StAppContainer>
+    </>
   );
 }
 
 export default App;
-
-const StAppContainer = styled.div`
-  min-width: 800px;
-  max-width: 1200px;
-  margin: 0 auto;
-`;
