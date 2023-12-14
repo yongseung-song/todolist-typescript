@@ -7,11 +7,11 @@ import {
 } from 'react';
 import styled from 'styled-components';
 import { v4 as uuid } from 'uuid';
-import { Todo } from '../App';
+import { Todo as TodoType } from '../App';
 
 interface Props {
-  setTodos: Dispatch<SetStateAction<Todo[]>>;
-  // setTodos:(callback:(prev:Todo[]) => Todo[]) => void
+  setTodos: Dispatch<SetStateAction<TodoType[]>>;
+  // setTodos:(callback:(prev:TodoType[]) => TodoType[]) => void
 }
 
 function TodoForm({ setTodos }: Props) {
@@ -34,7 +34,7 @@ function TodoForm({ setTodos }: Props) {
 
   const onSubmitBtnClickHandler = (e: FormEvent) => {
     e.preventDefault();
-    const newTodo: Todo = {
+    const newTodo: TodoType = {
       title,
       content,
       isDone: false,
