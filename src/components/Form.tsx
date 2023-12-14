@@ -9,8 +9,8 @@ import { addTodo } from '../redux/modules/todo.slice';
 const DEFAULT_TITLE = '오늘의 할 일';
 
 function Form() {
-  const [title, onTitleChangeHandler] = useInput(DEFAULT_TITLE);
-  const [content, onContentChangeHandler] = useInput('');
+  const [title, onTitleChangeHandler, resetTitle] = useInput(DEFAULT_TITLE);
+  const [content, onContentChangeHandler, resetContent] = useInput('');
   const dispatch = useAppDisPatch();
 
   const onSubmitHandler = (e: FormEvent<HTMLFormElement>) => {
@@ -23,6 +23,8 @@ function Form() {
       isDone: false,
     };
     dispatch(addTodo(newTodo));
+    resetTitle();
+    resetContent();
   };
 
   return (
@@ -45,10 +47,10 @@ function Form() {
             onChange={onContentChangeHandler}
           />
         </div>
+        <div>
+          <button type="submit">추가</button>
+        </div>
       </form>
-      <div>
-        <button type="submit">추가</button>
-      </div>
     </div>
   );
 }

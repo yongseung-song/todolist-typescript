@@ -10,7 +10,7 @@ const useInput = (
   };
 
   const resetState = () => {
-    setState('');
+    setState(initialValue);
   };
 
   return [state, handler, resetState];

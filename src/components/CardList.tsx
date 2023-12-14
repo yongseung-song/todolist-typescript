@@ -17,9 +17,9 @@ function CardList({ isActive }: Props) {
         <ul>
           {todos
             .filter((todo) => todo.isDone === !isActive)
-            .map((todo) => (
+            .map((item) => (
               <li>
-                <Card key={todo.id} todo={todo} />
+                <Card key={item.id} todo={item} />
               </li>
             ))}
         </ul>
@@ -32,6 +32,7 @@ export default CardList;
 
 const StCardListWrapper = styled.section`
   padding: 1.5rem;
+  height: 220px;
   h1 {
     font-size: 2rem;
     font-weight: 900;

@@ -1,13 +1,30 @@
 import styled from 'styled-components';
+import { Todo } from '../App';
+import { useAppDisPatch } from '../hooks/rtkHooks';
+import { deleteTodo, updateTodo } from '../redux/modules/todo.slice';
 
-function Card() {
+interface Props {
+  todo: Todo;
+}
+
+function Card({ todo }: Props) {
+  const dispatch = useAppDisPatch();
+  const onToggleCompletedBtnClickHandler = (id: string) => {
+    dispatch(updateTodo(id));
+  };
+  const onDeleteBtnClickHandler = (id: string) => {
+    dispatch(deleteTodo(id));
+  };
   return (
     <StCardContainer>
-      <h3>엥</h3>
-      <p>먼디</p>
+      <h3>{todo.title}</h3>
+      <p>{todo.content}</p>
+      <p>{todo.createdAt}</p>
       <StBtnContainer>
-        <button>완료</button>
-        <button>삭제</button>
+        <button onClick={() => onToggleCompletedBtnClickHandler(todo.id)}>
+          {todo.isDone ? `취소` : `완료`}
+        </button>
+        <button onClick={() => onDeleteBtnClickHandler(todo.id)}>삭제</button>
       </StBtnContainer>
     </StCardContainer>
   );
