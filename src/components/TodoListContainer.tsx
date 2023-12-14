@@ -1,4 +1,5 @@
 import { Dispatch, SetStateAction } from 'react';
+import styled from 'styled-components';
 import { Todo } from '../App';
 import TodoList from './TodoList';
 
@@ -18,11 +19,13 @@ function TodoListContainer({ todos, setTodos }: Props) {
   );
 
   return (
-    <section>
+    <StSection>
       <TodoList isActive={true} todos={undoneTodos} setTodos={setTodos} />
       <TodoList isActive={false} todos={doneTodos} setTodos={setTodos} />
-    </section>
+    </StSection>
   );
 }
 
 export default TodoListContainer;
+
+const StSection = styled.section``;

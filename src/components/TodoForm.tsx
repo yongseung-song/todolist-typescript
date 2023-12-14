@@ -1,4 +1,10 @@
-import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
+import {
+  ChangeEvent,
+  Dispatch,
+  FormEvent,
+  SetStateAction,
+  useState,
+} from 'react';
 import styled from 'styled-components';
 import { v4 as uuid } from 'uuid';
 import { Todo } from '../App';
@@ -17,7 +23,6 @@ function TodoForm({ setTodos }: Props) {
     mode: string
   ) => {
     const value = e.target.value;
-
     if (mode === 'title') {
       setTitle(value);
       console.log(value);
@@ -27,7 +32,8 @@ function TodoForm({ setTodos }: Props) {
     }
   };
 
-  const onSubmitBtnClickHandler = () => {
+  const onSubmitBtnClickHandler = (e: FormEvent) => {
+    e.preventDefault();
     const newTodo: Todo = {
       title,
       content,
@@ -36,11 +42,13 @@ function TodoForm({ setTodos }: Props) {
     };
 
     setTodos((prevTodos) => [newTodo, ...prevTodos]);
+    setTitle('');
+    setContent('');
   };
 
   return (
     <div>
-      <StForm action="">
+      <StForm action="" onSubmit={onSubmitBtnClickHandler}>
         <label htmlFor="">제목</label>
         <input
           value={title}
@@ -53,8 +61,8 @@ function TodoForm({ setTodos }: Props) {
           type="text"
           onChange={(e) => onTextValueChange(e, 'content')}
         />
+        <StButton>submit</StButton>
       </StForm>
-      <StButton onClick={onSubmitBtnClickHandler}>submit</StButton>
     </div>
   );
 }
