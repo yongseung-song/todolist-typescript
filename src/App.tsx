@@ -11,11 +11,11 @@ export type Todo = {
 };
 function App() {
   return (
-    <div>
+    <>
       <Header />
       <Form />
       <CardListContainer />
-    </div>
+    </>
   );
 }
 
