@@ -2,16 +2,15 @@ import dayjs from 'dayjs';
 import { FormEvent } from 'react';
 import { v4 as uuid } from 'uuid';
 import { Todo } from '../App';
-import { useAppDisPatch } from '../hooks/rtkHooks';
 import useInput from '../hooks/useInput';
-import { addTodo } from '../redux/modules/todo.slice';
+import useTodos from '../hooks/useTodos';
 
 const DEFAULT_TITLE = '오늘의 할 일';
 
 function Form() {
   const [title, onTitleChangeHandler, resetTitle] = useInput(DEFAULT_TITLE);
   const [content, onContentChangeHandler, resetContent] = useInput('');
-  const dispatch = useAppDisPatch();
+  const { addTodo } = useTodos();
 
   const onSubmitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -22,7 +21,7 @@ function Form() {
       createdAt: dayjs().format('YYYY년 MM월 DD일 hh:mm'),
       isDone: false,
     };
-    dispatch(addTodo(newTodo));
+    addTodo(newTodo);
     resetTitle();
     resetContent();
   };

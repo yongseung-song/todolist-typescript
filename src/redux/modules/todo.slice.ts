@@ -4,12 +4,10 @@ import { RootState } from '../config/configStore';
 
 interface TodoState {
   todos: Todo[];
-  isDone: boolean;
 }
 
 const initialState: TodoState = {
   todos: [],
-  isDone: false,
 };
 
 const todoSlice = createSlice({
@@ -21,8 +19,6 @@ const todoSlice = createSlice({
     },
     addTodo: (state, action: PayloadAction<Todo>) => {
       state.todos.push(action.payload);
-      const stringifiedTodos = JSON.stringify(state.todos);
-      localStorage.setItem('todos', stringifiedTodos);
     },
     updateTodo: (state, action: PayloadAction<string>) => {
       console.log(action.payload);
@@ -35,8 +31,6 @@ const todoSlice = createSlice({
     },
     deleteTodo: (state, action: PayloadAction<string>) => {
       state.todos = state.todos.filter((todo) => todo.id !== action.payload);
-      const stringifiedTodos = JSON.stringify(state.todos);
-      localStorage.setItem('todos', stringifiedTodos);
     },
   },
 });

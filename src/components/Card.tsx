@@ -1,19 +1,18 @@
 import styled from 'styled-components';
 import { Todo } from '../App';
-import { useAppDisPatch } from '../hooks/rtkHooks';
-import { deleteTodo, updateTodo } from '../redux/modules/todo.slice';
+import useTodos from '../hooks/useTodos';
 
 interface Props {
   todo: Todo;
 }
 
 function Card({ todo }: Props) {
-  const dispatch = useAppDisPatch();
+  const { toggleCompleteTodo, deleteTodo } = useTodos();
   const onToggleCompletedBtnClickHandler = (id: string) => {
-    dispatch(updateTodo(id));
+    toggleCompleteTodo(id);
   };
   const onDeleteBtnClickHandler = (id: string) => {
-    dispatch(deleteTodo(id));
+    deleteTodo(id);
   };
   return (
     <StCardContainer>

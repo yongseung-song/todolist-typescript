@@ -1,18 +1,11 @@
 import { useEffect } from 'react';
-import { Todo } from '../App';
-import { useAppDisPatch } from '../hooks/rtkHooks';
-import { setTodo } from '../redux/modules/todo.slice';
+import useTodos from '../hooks/useTodos';
 import CardList from './CardList';
 
 function CardListContainer() {
-  const dispatch = useAppDisPatch();
+  const { fetchTodos } = useTodos();
   useEffect(() => {
-    const todosFromLocalStorage: Todo[] = JSON.parse(
-      localStorage.getItem('todos') as string
-    );
-    if (todosFromLocalStorage) {
-      dispatch(setTodo(todosFromLocalStorage));
-    }
+    fetchTodos();
   }, []);
 
   return (

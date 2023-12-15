@@ -18,7 +18,7 @@ function CardList({ isActive }: Props) {
           {todos
             .filter((todo) => todo.isDone === !isActive)
             .map((item) => (
-              <li>
+              <li key={item.id}>
                 <Card key={item.id} todo={item} />
               </li>
             ))}
