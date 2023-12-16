@@ -1,25 +1,11 @@
 {
   "todos": [
     {
-      "id": "ef8d74e5-e9ff-4c16-9bd2-0690b83b0112",
+      "id": "bc0c401f-3f37-44a5-ac6d-42dd3329c0e4",
       "title": "오늘의 할 일",
-      "content": "룰루",
-      "createdAt": "2023년 12월 15일 04:05",
+      "content": "잘까요?",
+      "createdAt": "2023년 12월 17일 02:55",
       "isDone": false
-    },
-    {
-      "id": "2ca4ce03-71f5-453b-8433-6b7b2bf1704f",
-      "title": "오늘의 할 일",
-      "content": "랄라",
-      "createdAt": "2023년 12월 15일 04:05",
-      "isDone": false
-    },
-    {
-      "id": "fa4d60fd-56ae-4328-9e40-d464ba0dc5fd",
-      "title": "오늘의 할 일",
-      "content": "야호!",
-      "createdAt": "2023년 12월 15일 04:05",
-      "isDone": true
     }
   ]
 }
