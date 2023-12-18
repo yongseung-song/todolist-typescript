@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-import { useAppSelector } from '../hooks/rtkHooks';
-import { selectTodos } from '../redux/modules/todo.slice';
+import useTodos from '../hooks/useTodos';
 import Card from './Card';
 
 interface Props {
@@ -8,7 +7,7 @@ interface Props {
 }
 
 function CardList({ isActive }: Props) {
-  const todos = useAppSelector(selectTodos);
+  const { todos } = useTodos();
 
   return (
     <StCardListWrapper>

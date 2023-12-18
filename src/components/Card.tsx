@@ -8,8 +8,8 @@ interface Props {
 
 function Card({ todo }: Props) {
   const { toggleCompleteTodo, deleteTodo } = useTodos();
-  const onToggleCompletedBtnClickHandler = (id: string) => {
-    toggleCompleteTodo(id);
+  const onToggleCompletedBtnClickHandler = (id: string, isDone: boolean) => {
+    toggleCompleteTodo({ id, isDone });
   };
   const onDeleteBtnClickHandler = (id: string) => {
     deleteTodo(id);
@@ -20,7 +20,11 @@ function Card({ todo }: Props) {
       <p>{todo.content}</p>
       <p>{todo.createdAt}</p>
       <StBtnContainer>
-        <button onClick={() => onToggleCompletedBtnClickHandler(todo.id)}>
+        <button
+          onClick={() =>
+            onToggleCompletedBtnClickHandler(todo.id, !todo.isDone)
+          }
+        >
           {todo.isDone ? `취소` : `완료`}
         </button>
         <button onClick={() => onDeleteBtnClickHandler(todo.id)}>삭제</button>

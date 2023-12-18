@@ -1,30 +1,68 @@
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Todo } from '../App';
-import {
-  addTodoThunk,
-  deleteTodoThunk,
-  fetchTodoThunk,
-  updateTodoThunk,
-} from '../redux/modules/todo.slice';
-import { useAppDisPatch } from './rtkHooks';
+import jsonServerInstance from '../api/api';
 
 export default function useTodos() {
-  const dispatch = useAppDisPatch();
+  const queryClient = useQueryClient();
+  const { data: todos } = useQuery({
+    queryKey: ['todos'],
+    queryFn: fetchTodo,
+    initialData: [],
+  });
 
-  const fetchTodos = () => {
-    dispatch(fetchTodoThunk());
-  };
+  const { mutate: addTodo } = useMutation({
+    mutationFn: addTodoMutation,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['todos'] });
+    },
+  });
 
-  const addTodo = (todo: Todo) => {
-    dispatch(addTodoThunk(todo));
-  };
+  const { mutate: toggleCompleteTodo } = useMutation({
+    mutationFn: toggleCompleteTodoMutation,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['todos'] });
+    },
+  });
 
-  const toggleCompleteTodo = (id: string) => {
-    dispatch(updateTodoThunk(id));
-  };
+  const { mutate: deleteTodo } = useMutation({
+    mutationFn: deleteTodoMutation,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['todos'] });
+    },
+  });
 
-  const deleteTodo = (id: string) => {
-    dispatch(deleteTodoThunk(id));
-  };
+  return { todos, addTodo, toggleCompleteTodo, deleteTodo };
+}
 
-  return { fetchTodos, addTodo, toggleCompleteTodo, deleteTodo };
+async function fetchTodo(): Promise<Todo[]> {
+  try {
+    const response = await jsonServerInstance.get('/todos');
+    return response.data as Todo[];
+  } catch (error) {
+    throw new Error('error occurred in fetching data');
+  }
+}
+
+async function addTodoMutation(newTodo: Todo) {
+  try {
+    await jsonServerInstance.post('/todos', newTodo);
+  } catch (error) {
+    throw new Error('error occurred in adding data');
+  }
+}
+
+async function toggleCompleteTodoMutation({ id, isDone }: Partial<Todo>) {
+  try {
+    await jsonServerInstance.patch(`/todos/${id}`, { isDone });
+  } catch (error) {
+    throw new Error('error occurred in updating data');
+  }
+}
+
+async function deleteTodoMutation(id: string) {
+  try {
+    await jsonServerInstance.delete(`/todos/${id}`);
+  } catch (error) {
+    throw new Error('delete todo error');
+  }
 }
