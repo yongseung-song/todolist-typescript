@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 function Header() {
-  return <StHeader>TodoList level 2 - RTK with TS</StHeader>;
+  return <StHeader>TodoList level 4 - RTK + Thunk with TS</StHeader>;
 }
 
 export default Header;
