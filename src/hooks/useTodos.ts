@@ -36,8 +36,8 @@ export default function useTodos() {
 
 async function fetchTodo(): Promise<Todo[]> {
   try {
-    const response = await jsonServerInstance.get('/todos');
-    return response.data as Todo[];
+    const response = await jsonServerInstance.get<Todo[]>('/todos');
+    return response.data;
   } catch (error) {
     throw new Error('error occurred in fetching data');
   }
@@ -45,7 +45,7 @@ async function fetchTodo(): Promise<Todo[]> {
 
 async function addTodoMutation(newTodo: Todo) {
   try {
-    await jsonServerInstance.post('/todos', newTodo);
+    await jsonServerInstance.post<Todo>('/todos', newTodo);
   } catch (error) {
     throw new Error('error occurred in adding data');
   }
